@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var icon: UIImageView!
@@ -19,6 +20,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var air_pressure: UITextField!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var previousBtn: UIButton!
+    @IBOutlet weak var currentLocalizationLabel: UILabel!
+    
+    let locationManager = CLLocationManager()
+    
     
     let urlStr: String = "https://www.metaweather.com/api/location/"
     var weatherData: [[String: Any]] = []
@@ -26,8 +31,35 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initLocation()
         loadWeather()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    
+    func initLocation(){
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.delegate = self
+        self.locationManager.startMonitoringSignificantLocationChanges()
+    }
+    
+    func locationManager(_ manager: CLLocationManager,  didUpdateLocations locations: [CLLocation]) {
+        CLGeocoder().reverseGeocodeLocation(locations.last!, completionHandler: {(placemarks, error) -> Void in
+            
+            if error != nil {
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                return
+            }
+            
+            if placemarks!.count > 0 {
+                print(placemarks!)
+            }
+            else {
+                print("Problem with the data received from geocoder")
+            }
+        })
+        
+        // Do something with the location.
     }
     
     func loadWeather(){
@@ -44,6 +76,10 @@ class ViewController: UIViewController {
             }
         }
         task.resume()
+    }
+    
+    func findCity(){
+        
     }
     
     func getCity() -> String{
