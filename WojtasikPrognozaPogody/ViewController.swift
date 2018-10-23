@@ -10,17 +10,6 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    struct Forecast {
-        let min_temp: Double?
-        let max_temp: Double?
-        let wind_speed: Double?
-        let wind_direction: Int?
-        let air_pressure: Any?
-        
-        let location: (latitude: Double, longitude: Double)
-    }
-    
-    
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var min_temp: UITextField!
@@ -28,10 +17,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var wind_speed: UITextField!
     @IBOutlet weak var wind_direction: UITextField!
     @IBOutlet weak var air_pressure: UITextField!
+    @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var previousBtn: UIButton!
     
     let urlStr: String = "https://www.metaweather.com/api/location/"
-    
-    var resp: String = ""
+    var weatherData: [[String: Any]] = []
+    var choosenDayId: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +31,16 @@ class ViewController: UIViewController {
     }
     
     func loadWeather(){
-        let utlT: String = urlStr + getCity() + currentDate()
+        let utlT: String = urlStr + getCity()
         print(utlT)
         let url: URL = URL.init(string: utlT)!
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard let data = data else { return }
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {return}
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {return}
+            guard let weatherData = json!["consolidated_weather"] as? [[String: Any]] else {return}
             DispatchQueue.main.async {
-                self.updateView(jsonArray: json!)
+                self.weatherData = weatherData
+                self.updateView()
             }
         }
         task.resume()
@@ -66,19 +59,51 @@ class ViewController: UIViewController {
         return "\(year)/\(month)/\(day)/"
     }
     
-    func updateView(jsonArray: [[String:Any]]){
-        self.max_temp.insertText("\(jsonArray[1]["max_temp"]!)")
-        self.min_temp.insertText("\(jsonArray[1]["min_temp"]!)")
-        self.wind_speed.insertText("\(jsonArray[1]["wind_speed"]!)")
-        self.wind_direction.insertText("\(jsonArray[1]["wind_direction"]!)")
-        self.air_pressure.insertText("\(jsonArray[1]["air_pressure"]!)")
+    func updateView(){
+        self.max_temp.text = prepareTxt(field: "max_temp")
+        self.min_temp.text = prepareTxt(field: "min_temp")
+        self.wind_speed.text = prepareTxt(field: "wind_speed")
+        self.wind_direction.text = prepareTxt(field: "wind_direction")
+        self.air_pressure.text = prepareTxt(field: "air_pressure")
+        self.date.text = prepareTxt(field: "applicable_date")
         }
+    
+    func prepareTxt(field: String) -> String{
+        return "\(self.weatherData[self.choosenDayId][field]!)"
+    }
+    
+    func updateChoosenDayId(newId: Int) -> Bool {
+        if (newId > 4 || newId < 0) {
+            return false
+        }
+        else{
+            self.choosenDayId = newId
+            return true
+        }
+    }
 
-    @IBAction func displayNextDay(_ sender: UIButton) {
+    @IBAction func nextBtnClick(_ sender: Any) {
+        if (updateChoosenDayId(newId: self.choosenDayId+1)){
+            self.updateView()
+            previousBtn.isEnabled = true
+        }
+        else{
+            nextBtn.isEnabled = false
+        }
     }
     
     
-    @IBAction func displayPreviousDay(_ sender: UIButton) {
+    @IBAction func previousBtnClick(_ sender: Any) {
+        if(updateChoosenDayId(newId: self.choosenDayId-1)){
+        self.updateView()
+            nextBtn.isEnabled = true
+        }
+        else{
+            previousBtn.isEnabled = false
+        }
     }
+    
+
+    
 }
 
