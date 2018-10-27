@@ -14,6 +14,7 @@
 		3F93B309216C7EEC008AF064 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F93B307216C7EEC008AF064 /* LaunchScreen.storyboard */; };
 		3F93B314216C7EEC008AF064 /* WojtasikPrognozaPogodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93B313216C7EEC008AF064 /* WojtasikPrognozaPogodyTests.swift */; };
 		3F93B31F216C7EEC008AF064 /* WojtasikPrognozaPogodyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93B31E216C7EEC008AF064 /* WojtasikPrognozaPogodyUITests.swift */; };
+		75FB2243217F95FF00E2A925 /* WeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB2242217F95FF00E2A925 /* WeatherClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		3F93B31A216C7EEC008AF064 /* WojtasikPrognozaPogodyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WojtasikPrognozaPogodyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F93B31E216C7EEC008AF064 /* WojtasikPrognozaPogodyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WojtasikPrognozaPogodyUITests.swift; sourceTree = "<group>"; };
 		3F93B320216C7EEC008AF064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75FB2242217F95FF00E2A925 /* WeatherClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				3F93B2FE216C7EEA008AF064 /* AppDelegate.swift */,
 				3F93B300216C7EEA008AF064 /* ViewController.swift */,
+				75FB2242217F95FF00E2A925 /* WeatherClient.swift */,
 				3F93B302216C7EEA008AF064 /* Main.storyboard */,
 				3F93B305216C7EEC008AF064 /* Assets.xcassets */,
 				3F93B307216C7EEC008AF064 /* LaunchScreen.storyboard */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F93B301216C7EEA008AF064 /* ViewController.swift in Sources */,
+				75FB2243217F95FF00E2A925 /* WeatherClient.swift in Sources */,
 				3F93B2FF216C7EEA008AF064 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
