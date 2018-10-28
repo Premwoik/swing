@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct CityWeatherResponse: Codable {
+private struct CityWeatherResponse: Codable {
     let consolidatedWeather: [DayWeatherForecast]
 
     enum CodingKeys: String, CodingKey {
@@ -45,8 +45,7 @@ struct DayWeatherForecast: Codable {
 }
 
 protocol WeatherData{
-    var weatherData: [DayWeatherForecast]? {get set}
-    func updateDayView()
+    func updateWeatherData(data: [DayWeatherForecast])
     func updateWeatherImg(img: UIImage)
 }
 
@@ -62,16 +61,14 @@ class WeatherClient{
     }
     
     func getCityWeather(cityCode: String){
-        print(apiUrl + "location/" + cityCode)
         let url: URL = URL.init(string: apiUrl + "location/" + cityCode)!
+        print(url)
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard let data = data else { return }
             do{
             let responseObj = try JSONDecoder().decode(CityWeatherResponse.self, from: data)
-                
                 DispatchQueue.main.async{
-                    self.owner.weatherData = responseObj.consolidatedWeather
-                    self.owner.updateDayView()
+                    self.owner.updateWeatherData(data: responseObj.consolidatedWeather)
                 }
             }
             catch{
