@@ -12,25 +12,22 @@ import MapKit
 class ViewController: UIViewController, CLLocationManagerDelegate, WeatherData {
 
     
-
+    @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet var imgView: UIImageView!
     
-    
+    @IBOutlet weak var theTemp: UITextField!
     @IBOutlet weak var minTemp: UITextField!
     @IBOutlet weak var maxTemp: UITextField!
     @IBOutlet weak var windSpeed: UITextField!
     @IBOutlet weak var windDirection: UITextField!
     @IBOutlet weak var airPressure: UITextField!
-    @IBOutlet weak var nextBtn: UIButton!
-    @IBOutlet weak var previousBtn: UIButton!
-    @IBOutlet weak var currentLocalizationLabel: UILabel!
-    @IBOutlet weak var theTemp: UITextField!
     @IBOutlet weak var humidity: UITextField!
     @IBOutlet weak var visibility: UITextField!
     @IBOutlet weak var predictability: UITextField!
     
-//    let locationManager = CLLocationManager()
+    @IBOutlet weak var previousBtn: UIButton!
+    @IBOutlet weak var nextBtn: UIButton!
     
     
     var client: WeatherClient!
@@ -39,11 +36,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WeatherData {
     var weatherImg: UIImage?
     var choosenDayId: Int = 0
     
+    var city: City? {
+        didSet{
+            refreshUI()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.client = WeatherClient(owner: self)
-        self.client.getCityWeather(cityCode: "44418/")
+     
+    }
+    
+    func loadCity(){
+        self.cityName.text = city!.name
+        self.client.getCityWeather(cityCode: String(city!.id) + "/")
         self.previousBtn.isEnabled = false
+        
+    }
+    
+    func refreshUI(){
+        loadViewIfNeeded()
+        loadCity()
     }
     
     func updateDayView(){
@@ -105,3 +119,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, WeatherData {
     
 }
 
+extension ViewController: CitySelectionDelegate {
+    func citySelected(_ newCity: City) {
+        city  = newCity
+    }
+}

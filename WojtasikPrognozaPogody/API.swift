@@ -44,10 +44,57 @@ struct DayWeatherForecast: Codable {
     }
 }
 
+struct CityData: Codable {
+    let title: String
+    let woeid: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case woeid
+    }
+}
+
+typealias CitiesData = [CityData]
+
+
+protocol CityDataProt{
+    func updateCitiesData(data: CitiesData)
+    
+}
+
 protocol WeatherData{
     func updateWeatherData(data: [DayWeatherForecast])
     func updateWeatherImg(img: UIImage)
 }
+
+
+class CityClient{
+    let apiUrl: String = "https://www.metaweather.com/api/"
+    var owner: CityDataProt
+    
+    init(owner: CityDataProt) {
+        self.owner = owner
+    }
+    
+    func searchForCity(cityName: String){
+        let url: URL = URL.init(string: apiUrl + "location/search/?query=" + cityName)!
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            guard let data = data else { return }
+            do{
+                let responseObj = try JSONDecoder().decode(CitiesData.self, from: data)
+                DispatchQueue.main.async{
+                    self.owner.updateCitiesData(data: responseObj)
+                }
+            }
+            catch{
+                print("\(error)")
+            }
+        }
+        task.resume()
+        
+    }
+}
+
 
 class WeatherClient{
     
@@ -62,7 +109,6 @@ class WeatherClient{
     
     func getCityWeather(cityCode: String){
         let url: URL = URL.init(string: apiUrl + "location/" + cityCode)!
-        print(url)
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard let data = data else { return }
             do{
@@ -80,7 +126,6 @@ class WeatherClient{
     
     func getWeatherStateIcon(abbreviation: String){
         let url: URL = URL.init(string: staticUrl + "img/weather/png/\(abbreviation).png")!
-        print(url)
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard let data = data else {return}
             DispatchQueue.main.async{

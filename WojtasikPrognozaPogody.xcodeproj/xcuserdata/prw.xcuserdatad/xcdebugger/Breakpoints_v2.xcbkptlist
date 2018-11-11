@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WojtasikPrognozaPogody/WeatherClient.swift"
-            timestampString = "562381910.7603509"
+            timestampString = "563646716.7519161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "getCityWeather(cityCode:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,75 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WojtasikPrognozaPogody/WeatherClient.swift"
-            timestampString = "562381910.7604311"
+            timestampString = "563646716.752001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "getCityWeather(cityCode:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WojtasikPrognozaPogody.WeatherClient.getCityWeather(cityCode: Swift.String) -&gt; ()"
-                  moduleName = "WojtasikPrognozaPogody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prw/Code/swing/WojtasikPrognozaPogody/WeatherClient.swift"
-                  timestampString = "562024359.841122"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "757">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WojtasikPrognozaPogody.WeatherClient.getCityWeather(cityCode: Swift.String) -&gt; ()"
-                  moduleName = "WojtasikPrognozaPogody"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/prw/Code/swing/WojtasikPrognozaPogody/WeatherClient.swift"
-                  timestampString = "562024359.851055"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "70">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WojtasikPrognozaPogody/WeatherClient.swift"
-            timestampString = "562381910.7604899"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "getCityWeather(cityCode:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WojtasikPrognozaPogody/WeatherClient.swift"
-            timestampString = "562381910.7606061"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "getWeatherStateIcon(abbreviation:)"
             landmarkType = "7">
          </BreakpointContent>
